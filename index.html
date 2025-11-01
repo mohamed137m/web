@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Rwan 💖</title>
+<style>
+html, body {
+  margin:0; padding:0;
+  height:100%;
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(135deg, #ffe6eb, #ffd6e0);
+}
+
+body {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  min-height:100vh;
+  overflow-x:hidden;
+  padding:10px;
+}
+
+/* BACKGROUND HEARTS */
+.bg-heart {
+  position:absolute; color:rgba(255,255,255,0.4);
+  font-size:20px;
+  animation: float 6s linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(100vh) scale(1); opacity:0; }
+  20% { opacity:1; }
+  100% { transform: translateY(-10vh) scale(0.6); opacity:0; }
+}
+
+/* ENVELOPE */
+.envelope {
+  width: 160px; height:100px; background:#ffb6c1;
+  border-radius:5px; cursor:pointer; box-shadow:0 0 15px rgba(255,100,150,0.3);
+  position:relative; transition: transform 0.3s ease, opacity 0.4s ease;
+}
+.envelope:hover { transform: translateY(-5px); }
+.envelope::before {
+  content:''; position:absolute; top:0; left:0;
+  width:0;height:0; border-left:80px solid transparent;
+  border-right:80px solid transparent;
+  border-bottom:60px solid #ff8fa3; border-radius:5px;
+}
+
+/* PRESS TEXT */
+.press-text {
+  margin-top:15px;
+  font-size:16px; color:#ff4466; font-weight:bold;
+  text-align:center;
+  transition: opacity 0.4s ease;
+}
+
+/* HEART SVG */
+.heart-container {
+  margin-top:30px;
+  width:180px; height:180px;
+  display:flex; justify-content:center; align-items:center;
+  transform: scale(0);
+  transition: transform 1s ease;
+  position:relative;
+}
+.heart-container.show-heart {
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+.heart-container svg {
+  width:100%; height:100%;
+}
+.heart-text {
+  position:absolute;
+  font-size:24px; font-weight:bold;
+  color:white;
+  text-align:center;
+  width:100%;
+  top:50%;
+  transform:translateY(-50%);
+  text-shadow:0 0 8px rgba(0,0,0,0.3);
+}
+
+/* pulse */
+@keyframes pulse {
+  0%,100%{transform: scale(1);}
+  50%{transform: scale(1.1);}
+}
+
+/* MESSAGE */
+.message {
+  margin-top:25px;
+  background:#fffafc; border-radius:12px; padding:18px 25px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.12); max-width:90%; width:100%;
+  font-size:16px; line-height:2; color:#444; text-align:center;
+  direction:rtl; border:1px solid #ffd6e0; opacity:0;
+  transition:opacity 1s;
+  word-wrap: break-word;
+}
+.message.show-message { opacity:1; }
+
+/* TYPING EFFECT */
+.typed { display:block; margin:5px 0; font-size:1rem; }
+
+/* FLYING HEARTS */
+.flying { position:absolute; font-size:14px; animation: fly 6s linear infinite; opacity:0.7; }
+@keyframes fly {0%{transform:translate(0,0) rotate(0deg); opacity:0;}10%{opacity:1;}100%{transform:translate(200px,-300px) rotate(720deg); opacity:0;}}
+
+/* RESPONSIVE */
+@media (max-width:480px){
+  .envelope { width:120px; height:80px; }
+  .heart-container { width:140px; height:140px; }
+  .heart-text { font-size:18px; }
+  .message { font-size:14px; line-height:1.6; padding:15px; }
+  .press-text { font-size:14px; }
+}
+</style>
+</head>
+<body>
+
+<script>
+for(let i=0;i<40;i++){
+  const h=document.createElement('div');
+  h.className='bg-heart'; h.innerHTML='❤️';
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=12+Math.random()*24+'px';
+  h.style.animationDuration=4+Math.random()*6+'s';
+  h.style.animationDelay=Math.random()*4+'s';
+  document.body.appendChild(h);
+}
+</script>
+
+<div class="envelope" id="envelope"></div>
+<div class="press-text" id="pressText">اضغطي على الجواب يا Rwan 💌</div>
+
+<div class="heart-container" id="heart">
+  <svg viewBox="0 0 32 29.6">
+    <path fill="#ff6680" d="M23.6,0c-2.8,0-5.2,1.7-6.6,4.1C15.6,1.7,13.2,0,10.4,0C4.7,0,0,4.7,0,10.4c0,6.1,7.9,11.6,16,19.2
+      c8.1-7.6,16-13.1,16-19.2C32,4.7,27.3,0,23.6,0z"/>
+  </svg>
+  <div class="heart-text">Rwan</div>
+</div>
+
+<div class="message" id="message"></div>
+
+<script>
+const envelope=document.getElementById('envelope');
+const heart=document.getElementById('heart');
+const message=document.getElementById('message');
+const pressText=document.getElementById('pressText');
+
+const lines=[
+"يا Rwan ❤️",
+"بجد وجودك في حياتي غيّر حاجات كتير",
+"خلاها أبسط وأجمل وأهدى،",
+"ضحكتك لوحدها كفاية تخليني أنسى تعب اليوم كله.",
+"ربنا يديمك ليا يا أحلى صدفة 💖"
+];
+
+envelope.addEventListener('click',()=>{
+  envelope.style.opacity='0';
+  pressText.style.opacity='0';
+  heart.classList.add('show-heart');
+  setTimeout(()=>{
+    message.classList.add('show-message');
+    typeLines(lines);
+    addFlyingHearts();
+    // Scroll to message to center
+    message.scrollIntoView({behavior:"smooth", block:"center"});
+  },800);
+});
+
+function typeLines(lines){
+  message.innerHTML='';
+  let i=0;
+  function typeNextLine(){
+    if(i>=lines.length) return;
+    const lineSpan=document.createElement('span');
+    lineSpan.className='typed';
+    message.appendChild(lineSpan);
+    let j=0;
+    const interval=setInterval(()=>{
+      lineSpan.textContent=lines[i].slice(0,j);
+      j++;
+      if(j>lines[i].length){
+        clearInterval(interval);
+        i++;
+        setTimeout(typeNextLine,400);
+      }
+    },50);
+  }
+  typeNextLine();
+}
+
+function addFlyingHearts(){
+  for(let i=0;i<25;i++){
+    const f=document.createElement('div');
+    f.className='flying';
+    f.innerHTML=Math.random()>0.5?'💖':'🦋';
+    f.style.left=Math.random()*window.innerWidth+'px';
+    f.style.fontSize=10+Math.random()*20+'px';
+    f.style.animationDuration=4+Math.random()*4+'s';
+    f.style.animationDelay=Math.random()*2+'s';
+    document.body.appendChild(f);
+  }
+}
+</script>
+</body>
+</html>
